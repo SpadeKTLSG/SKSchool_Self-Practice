@@ -1,5 +1,7 @@
 package com.tlsg.skxy.common;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 /**
@@ -8,6 +10,8 @@ import lombok.Getter;
 @Getter
 public enum ResultCodeEnum {
 
+    //使用枚举类型，将所有的状态信息都定义好
+    //BY - 尚硅谷
     SUCCESS(200, "成功"),
     FAIL(201, "失败"),
     SERVICE_ERROR(2012, "服务异常"),
@@ -34,8 +38,10 @@ public enum ResultCodeEnum {
     CODE_ERROR(223, "验证码错误!"),
     TOKEN_ERROR(224, "Token无效!");
 
+    @Schema(description = "状态码")
     private Integer code;
 
+    @Schema(description = "消息")
     private String message;
 
     private ResultCodeEnum(Integer code, String message) {
