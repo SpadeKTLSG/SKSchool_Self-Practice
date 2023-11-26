@@ -21,10 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -39,16 +36,15 @@ import java.util.UUID;
 @RestController
 @Tag(name = "System", description = "系统控制器")
 public class SystemController {
-    @Autowired
-    AdminService adminService;
 
     @Autowired
-    StudentService studentService;
-
+    private AdminService adminService;
     @Autowired
-    TeacherService teacherService;
+    private StudentService studentService;
+    @Autowired
+    private TeacherService teacherService;
 
-
+    // 登录
     @Operation(summary = "登录", description = "登录接口", parameters = {
             @Parameter(name = "loginForm", description = "登录表单", required = true),
             @Parameter(name = "request", description = "请求", required = true)}
@@ -122,6 +118,7 @@ public class SystemController {
     }
 
 
+    // 获取验证码图片
     @Operation(summary = "获取验证码图片", description = "获取验证码图片接口",
             parameters = {
                     @Parameter(name = "request", description = "请求", required = true),
@@ -146,6 +143,7 @@ public class SystemController {
     }
 
 
+    // 修改密码
     @Operation(summary = "修改密码", description = "修改密码接口",
             parameters = {
                     @Parameter(name = "oldPwd", description = "旧密码", required = true),
@@ -153,7 +151,7 @@ public class SystemController {
                     @Parameter(name = "token", description = "token", required = true)}
     )
     @PostMapping("/updatePwd/{oldPwd}/{newPwd}")
-    public Result<Object> updatePwd(String token, String oldPwd, String newPwd) { // 修改密码
+    public Result<Object> updatePwd(@RequestHeader("token") String token, @PathVariable("oldPwd") String oldPwd, @PathVariable("newPwd") String newPwd) { // 修改密码
         boolean expiration = JwtHelper.isExpiration(token);
         if (expiration) {
             // token过期
@@ -218,6 +216,7 @@ public class SystemController {
     }
 
 
+    // 上传图片
     @Operation(summary = "上传图片", description = "上传图片接口",
             parameters = {
                     @Parameter(name = "multipartFile", description = "图片文件", required = true),
@@ -243,24 +242,30 @@ public class SystemController {
             portraitPath = "C:/code/myzhxy/target/classes/public/upload/".concat(newFileName);
         }
         try {
-            multipartFile.transferTo(new File(portraitPath));
+            if (portraitPath != null) {
+                multipartFile.transferTo(new File(portraitPath));
+            }
         } catch (IOException e) {
             log.info("上传失败");
         }
 
 
         // 响应图片的路径
-        String path = "upload/".concat(newFileName);
+        String path = null;
+        if (newFileName != null) {
+            path = "upload/".concat(newFileName);
+        }
         return Result.ok(path);
     }
 
 
+    // 获取用户信息
     @Operation(summary = "获取用户信息", description = "通过token口令获取当前登录的用户信息",
             parameters = {
                     @Parameter(name = "token", description = "token", required = true)}
     )
     @GetMapping("/getInfo")
-    public Result getInfoByToken(String token) {
+    public Result<Object> getInfoByToken(String token) {
         boolean expiration = JwtHelper.isExpiration(token);
         if (expiration) {
             return Result.build(null, ResultCodeEnum.TOKEN_ERROR);
@@ -290,6 +295,5 @@ public class SystemController {
         }
         return Result.ok(map);
     }
-
 
 }
