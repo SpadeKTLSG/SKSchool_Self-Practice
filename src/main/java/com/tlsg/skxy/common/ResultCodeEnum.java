@@ -1,6 +1,5 @@
 package com.tlsg.skxy.common;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
@@ -44,7 +43,7 @@ public enum ResultCodeEnum {
     @Schema(description = "消息")
     private String message;
 
-    private ResultCodeEnum(Integer code, String message) {
+    ResultCodeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

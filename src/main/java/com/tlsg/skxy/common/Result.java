@@ -10,13 +10,13 @@ import lombok.Data;
 @Data
 public class Result<T> {
 
-    @Schema(description = "状态码")
+    @Schema(name = "code", type = "Integer", description = "状态码", example = "200")
     private Integer code;
 
-    @Schema(description = "消息")
+    @Schema(name = "message", type = "String", description = "消息", example = "操作成功")
     private String message;
 
-    @Schema(description = "数据")
+    @Schema(name = "data", type = "Object", description = "数据")
     private T data;
 
 

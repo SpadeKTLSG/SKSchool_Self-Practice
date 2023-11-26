@@ -16,8 +16,8 @@ public class SwaggerConfig {
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("SK API")
-                        .description("SK的API文档")
-                        .version("v114514")
+                        .description("SK智慧校园API文档")
+                        .version("v114.514")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
                         .description("外部文档")
