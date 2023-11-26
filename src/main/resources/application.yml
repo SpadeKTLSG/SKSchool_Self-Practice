@@ -1,0 +1,91 @@
+server:
+  port: 8080
+
+#调整日志级别为debug
+logging:
+  level:
+    root: info #一般日志级别: error, warn, info, debug, trace
+    #    静默通知
+    com.atguigu: debug
+    com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean: INFO #mybatis-plus SQL执行日志: INFO级别
+
+
+
+spring:
+  main:
+    banner-mode: off # 关闭启动时的图标
+    allow-bean-definition-overriding: true #允许覆盖bean定义
+
+  application:
+    name: sk_xy # 应用名称
+  
+  
+  datasource:
+
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zhxy_db?characterEncoding=utf-8
+    username: root
+    password: 2333
+    
+    #数据源类型: 追光者
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      idle-timeout: 500000
+      max-lifetime: 540000
+      maximum-pool-size: 12
+      minimum-idle: 10
+      pool-name: GuliHikariPool
+  
+  
+  devtools:
+    restart: #设置开启热部署
+      enabled: true
+      additional-paths: src/main/java #重启目录
+      exclude: WEB-INF/**
+  
+  
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    cache: false  #使用Thymeleaf模板引擎，关闭缓存
+    prefix: classpath:/static/
+  
+  
+  #  JSON序列化配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  
+  #文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 10MB #单个文件最大
+      max-request-size: 100MB #总共文件最大
+  
+  jpa:
+    open-in-view: false #禁止延迟加载，避免出现懒加载异常
+
+# 配置swagger文档的访问路径
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+# 配置mybatis-plus的日志输出
+mybatis-plus:
+  configuration:
+
+    call-setters-on-nulls: true #查询结果为null时调用setter方法，防止字段为null时报错
+    map-underscore-to-camel-case: true #开启驼峰命名转换
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl #日志打印:取消Parsed-mapper-file日志打印
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #控制台打印完整带参数SQL语句
+
+  # 这里根据自己项目的包修改，扫描到自己的*xml文件
+  mapper-locations: classpath:mapper/*.xml
+
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+    banner: off #关闭mybatis-plus启动图标
+
