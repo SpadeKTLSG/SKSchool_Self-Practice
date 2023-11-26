@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tlsg.skxy.common.Result;
 import com.tlsg.skxy.pojo.Admin;
 import com.tlsg.skxy.service.AdminService;
+import com.tlsg.skxy.util.MD5;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,6 +23,8 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+
+    //分页带条件查询管理员
     @Operation(summary = "分页查管理员", description = "分页带条件查询管理员信息", parameters = {
             @Parameter(name = "pageNo", description = "页码数", required = true),
             @Parameter(name = "pageSize", description = "页大小", required = true),
@@ -29,18 +32,35 @@ public class AdminController {
     })
     @GetMapping("/getAllAdmin/{pageNo}/{pageSize}")
     public Result<Object> getAllAdmin(@PathVariable("pageNo") Integer pageNo, @PathVariable("pageSize") Integer pageSize, String adminName) {
-        Page<Admin> pageParam = new Page<Admin>(pageNo, pageSize);
+        Page<Admin> pageParam = new Page<>(pageNo, pageSize);
 
         IPage<Admin> iPage = adminService.getAdminsByOpr(pageParam, adminName);
         return Result.ok(iPage);
     }
 
 
+    //增加或修改管理员
     @Operation(summary = "增加或修改管理员", description = "增加或修改管理员信息", parameters = {
             @Parameter(name = "admin", description = "JSON格式的Admin对象", required = true)
     })
     @PostMapping("/saveOrUpdateAdmin")
-    public Result<Object> saveOrUpdateAdmin(@RequestBody List<Integer> ids) {
+    public Result<Object> saveOrUpdateAdmin(@RequestBody Admin admin) {
+        Integer id = admin.getId();
+        if (id == null || 0 == id) {
+            admin.setPassword(MD5.encrypt(admin.getPassword()));
+        }
+        adminService.saveOrUpdate(admin);
+        return Result.ok();
+
+    }
+
+
+    //删除单个或者多个管理员
+    @Operation(summary = "删除管理员", description = "删除单个或者多个管理员信息", parameters = {
+            @Parameter(name = "ids", description = "管理员id数组", required = true)
+    })
+    @DeleteMapping("/deleteAdmin")
+    public Result<Object> deleteAdmin(@RequestBody List<Integer> ids) {
         adminService.removeByIds(ids);
         return Result.ok();
     }
