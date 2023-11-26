@@ -16,7 +16,7 @@ public class Result<T> {
     @Schema(name = "message", type = "String", description = "消息", example = "操作成功")
     private String message;
 
-    @Schema(name = "data", type = "Object", description = "数据")
+    @Schema(name = "data", type = "Object", description = "数据", example = "null")
     private T data;
 
 
@@ -24,10 +24,6 @@ public class Result<T> {
     }
 
 
-    //    // 返回数据
-//    @Operation(summary = "返回数据", parameters = {
-//            @Parameter(name = "data", description = "数据", required = true)
-//    })
     protected static <T> Result<T> build(T data) {
         Result<T> result = new Result<T>();
         if (data != null)
