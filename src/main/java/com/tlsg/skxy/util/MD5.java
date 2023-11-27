@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 @Slf4j
 public final class MD5 {
 
-    public static String encrypt(String strSrc) {
+    public static String encrypt(String strSrc) { // MD5加密算法
         try {
             char hexChars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8',
                     '9', 'a', 'b', 'c', 'd', 'e', 'f'};

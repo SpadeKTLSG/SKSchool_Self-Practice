@@ -13,7 +13,7 @@ import java.util.List;
 public interface ClazzService extends IService<Clazz> {
 
 
-    IPage<Clazz> getClazzsByOpr(Page<Clazz> page, Clazz clazz);
+    IPage<Clazz> getClazzsByOpr(Page<Clazz> pageParam, Clazz clazz);
 
     List<Clazz> getClazzs();
 }

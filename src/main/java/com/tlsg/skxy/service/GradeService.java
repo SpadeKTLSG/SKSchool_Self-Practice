@@ -13,7 +13,7 @@ import java.util.List;
 public interface GradeService extends IService<Grade> {
 
 
-    IPage<Grade> getGradeByOpr(Page<Grade> page, String gradeName);
+    IPage<Grade> getGradeByOpr(Page<Grade> pageParam, String gradeName);
 
     List<Grade> getGrades();
 }
