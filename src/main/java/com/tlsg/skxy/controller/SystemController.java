@@ -44,7 +44,8 @@ public class SystemController {
     @Autowired
     private TeacherService teacherService;
 
-    // 登录
+    //? 登录
+    //! README : 需要验证码, Postman不好调试,建议使用浏览器调试
     @Operation(summary = "登录", description = "登录接口", parameters = {
             @Parameter(name = "loginForm", description = "登录表单", required = true),
             @Parameter(name = "request", description = "请求", required = true)}
@@ -115,10 +116,10 @@ public class SystemController {
             }
         }
         return Result.fail().message("查无此用户");
-    }
+    } //http://localhost:8080/login
 
 
-    // 获取验证码图片
+    //? 获取验证码图片
     @Operation(summary = "获取验证码图片", description = "获取验证码图片接口",
             parameters = {
                     @Parameter(name = "request", description = "请求", required = true),
@@ -140,10 +141,10 @@ public class SystemController {
         } catch (IOException e) {
             log.info("验证码图片获取失败");
         }
-    }
+    }// http://localhost:8080/getVerifiCodeImage
 
 
-    // 修改密码
+    //? 修改密码
     @Operation(summary = "修改密码", description = "修改密码接口",
             parameters = {
                     @Parameter(name = "oldPwd", description = "旧密码", required = true),
@@ -164,7 +165,6 @@ public class SystemController {
         oldPwd = MD5.encrypt(oldPwd);
         newPwd = MD5.encrypt(newPwd);
 
-        // fix userType NullPointerException: Global exception handler TODO
         switch (userType) {
             case 1 -> {
                 QueryWrapper<Admin> queryWrapper1 = new QueryWrapper<>();
@@ -213,10 +213,10 @@ public class SystemController {
             }
         }
         return Result.ok();
-    }
+    }// http://localhost:8080/updatePwd/123456/123456
 
 
-    // 上传图片
+    //? 上传图片
     @Operation(summary = "上传图片", description = "上传图片接口",
             parameters = {
                     @Parameter(name = "multipartFile", description = "图片文件", required = true),
@@ -226,6 +226,9 @@ public class SystemController {
     public Result<Object> headerImgUpload(MultipartFile multipartFile, HttpServletRequest request) {
 
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        if (multipartFile == null) {
+            return Result.fail().message("上传失败");
+        }
         String originalFilename = multipartFile.getOriginalFilename();
         int i = 0;
         if (originalFilename != null) {
@@ -256,7 +259,7 @@ public class SystemController {
             path = "upload/".concat(newFileName);
         }
         return Result.ok(path);
-    }
+    }// http://localhost:8080/headerImgUpload
 
 
     // 获取用户信息

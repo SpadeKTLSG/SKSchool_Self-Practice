@@ -23,15 +23,15 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    //删除
+    //?删除
     @Operation(summary = "删除学生", description = "删除单个或者多个学生信息", parameters = {@Parameter(name = "ids", description = "要删除的学生编号的JSON数组", required = true)})
     @DeleteMapping("/delStudentById")
     public Result<Object> delStudentById(@RequestBody List<Integer> ids) {
         studentService.removeByIds(ids);
         return Result.ok();
-    }
+    }//http://localhost:8080/sms/studentController/delStudentById
 
-    //增加或修改
+    //?增加或修改
     @Operation(summary = "保存或者修改学生信息", description = "保存或者修改学生信息", parameters = {@Parameter(name = "student", description = "要保存或修改的学生JSON", required = true)})
     @PostMapping("/addOrUpdateStudent")
     public Result<Object> addOrUpdateStudent(@RequestBody Student student) {
@@ -41,9 +41,9 @@ public class StudentController {
         }
         studentService.saveOrUpdate(student);
         return Result.ok();
-    }
+    }//http://localhost:8080/sms/studentController/addOrUpdateStudent
 
-    //分页查询
+    //?分页查询
     @Operation(summary = "分页带条件查询学生信息", description = "分页带条件查询学生信息", parameters = {
             @Parameter(name = "pageNo", description = "页码数", required = true),
             @Parameter(name = "pageSize", description = "页大小", required = true),
@@ -57,6 +57,6 @@ public class StudentController {
         IPage<Student> studentPage = studentService.getStudentByOpr(pageParam, student);
 
         return Result.ok(studentPage);
-    }
+    }//http://localhost:8080/sms/studentController/getStudentByOpr/1/5
 
 }
