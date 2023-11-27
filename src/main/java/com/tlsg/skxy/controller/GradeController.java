@@ -21,16 +21,16 @@ public class GradeController {
     @Autowired
     private GradeService gradeService;
 
-    //查全部年级
+    //?查全部年级
     @Operation(summary = "查询所有年级", description = "查询所有年级信息", parameters = {})
     @GetMapping("/getGrades")
     public Result<Object> getGrades() {
 
         List<Grade> grades = gradeService.getGrades();
         return Result.ok(grades);
-    }
+    }//http://localhost:8080/sms/gradeController/getGrades
 
-    //删除单个和多个年级
+    //?删除单个和多个年级
     @Operation(summary = "删除年级", description = "删除单个和多个年级", parameters = @Parameter(name = "ids", description = "要删除的多个年级的ID的JSON数组", required = true))
     @DeleteMapping("/deleteGrade")
     public Result<Object> deleteGrade(@RequestBody List<Integer> ids) {

@@ -68,11 +68,11 @@ public class AdminController {
     @Operation(summary = "删除管理员", description = "删除单个或者多个管理员信息", parameters = {
             @Parameter(name = "ids", description = "管理员id数组", required = true)})
     @DeleteMapping("/deleteAdmin")
-    public Result<Object> deleteAdmin(@RequestParam List<Integer> ids) {
+    public Result<Object> deleteAdmin(@RequestBody List<Integer> ids) {
         adminService.removeByIds(ids);
         return Result.ok();
     }
-    //http://localhost:8080/sms/adminController/deleteAdmin?ids=1&ids=2
+    //http://localhost:8080/sms/adminController/deleteAdmin
 
 
 }

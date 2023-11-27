@@ -32,7 +32,6 @@ public class ClazzController {
     //http://localhost:8080/sms/clazzController/getClazzs
 
     //?删除单个和多个班级
-    //
     @Operation(summary = "删除班级", description = "删除单个和多个班级", parameters = {
             @Parameter(name = "ids", description = "要删除的多个班级的ID的JSON数组", required = true)})
     @DeleteMapping("/deleteClazz")
@@ -40,10 +39,10 @@ public class ClazzController {
         clazzService.removeByIds(ids);
         return Result.ok();
     }
-    //http://localhost:8080/sms/clazzController/deleteClazz?ids=1
+    //http://localhost:8080/sms/clazzController/deleteClazz
 
 
-    //增加或者修改班级信息
+    //?增加或者修改班级信息
     @Operation(summary = "增加或者修改班级", description = "增加或者修改班级信息", parameters = {
             @Parameter(name = "clazz", description = "JSON格式的班级信息", required = true)})
     @PostMapping("/saveOrUpdateClazz")
@@ -53,7 +52,7 @@ public class ClazzController {
     }//http://localhost:8080/sms/clazzController/saveOrUpdateClazz
 
 
-    //分页带条件查询班级信息
+    //?分页带条件查询班级信息
     @Operation(summary = "分页查班级", description = "分页带条件查询班级信息", parameters = {
             @Parameter(name = "pageNo", description = "当前页码", required = true),
             @Parameter(name = "pageSize", description = "每页显示条数", required = true),
@@ -66,7 +65,7 @@ public class ClazzController {
         IPage<Clazz> iPage = clazzService.getClazzsByOpr(page, clazz);
 
         return Result.ok(iPage);
-    }
+    }//http://localhost:8080/sms/clazzController/getClazzsByOpr/1/5
 
 
 }
