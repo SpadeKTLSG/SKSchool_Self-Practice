@@ -14,6 +14,7 @@ import java.util.UUID;
  * @description: 上传文件的工具类
  */
 public class UploadFile {
+    //可以在yml中定义上传文件的路径然后注入到这里, 这里省略
 
     //存储文件上传失败的错误信息
     private static Map<String, Object> error_result = new HashMap<>();

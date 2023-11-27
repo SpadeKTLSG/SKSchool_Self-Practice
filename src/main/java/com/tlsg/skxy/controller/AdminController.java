@@ -3,6 +3,7 @@ package com.tlsg.skxy.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tlsg.skxy.common.CustomException;
 import com.tlsg.skxy.common.Result;
 import com.tlsg.skxy.pojo.Admin;
 import com.tlsg.skxy.service.AdminService;
@@ -25,11 +26,7 @@ public class AdminController {
 
 
     //分页带条件查询管理员
-    @Operation(summary = "分页查管理员", description = "分页带条件查询管理员信息", parameters = {
-            @Parameter(name = "pageNo", description = "页码数", required = true),
-            @Parameter(name = "pageSize", description = "页大小", required = true),
-            @Parameter(name = "adminName", description = "管理员名字", required = false)
-    })
+    @Operation(summary = "分页查管理员", description = "分页带条件查询管理员信息", parameters = {@Parameter(name = "pageNo", description = "页码数", required = true), @Parameter(name = "pageSize", description = "页大小", required = true), @Parameter(name = "adminName", description = "管理员名字", required = false)})
     @GetMapping("/getAllAdmin/{pageNo}/{pageSize}")
     public Result<Object> getAllAdmin(@PathVariable("pageNo") Integer pageNo, @PathVariable("pageSize") Integer pageSize, String adminName) {
         Page<Admin> pageParam = new Page<>(pageNo, pageSize);
@@ -40,25 +37,28 @@ public class AdminController {
 
 
     //增加或修改管理员
-    @Operation(summary = "增加或修改管理员", description = "增加或修改管理员信息", parameters = {
-            @Parameter(name = "admin", description = "JSON格式的Admin对象", required = true)
-    })
+    //注意图片上传内容, 见图片上传工具类
+    @Operation(summary = "增加或修改管理员", description = "增加或修改管理员信息", parameters = {@Parameter(name = "admin", description = "JSON格式的Admin对象", required = true)})
     @PostMapping("/saveOrUpdateAdmin")
-    public Result<Object> saveOrUpdateAdmin(@RequestBody Admin admin) {
+    public Result<Object> saveOrUpdateAdmin(@RequestBody Admin admin) throws CustomException { //自定义业务异常
         Integer id = admin.getId();
-        if (id == null || 0 == id) {
-            admin.setPassword(MD5.encrypt(admin.getPassword()));
+        //FIXME 主键插入异常, 会导致覆盖问题...
+        if (id == null || id == 0) {
+            return Result.fail("id不能为空");
         }
-        adminService.saveOrUpdate(admin);
-        return Result.ok();
+        //如果密码不为空, 则进行加密
+        else {
+            admin.setPassword(MD5.encrypt(admin.getPassword()));
 
+            adminService.saveOrUpdate(admin);
+            return Result.ok();
+
+        }
     }
 
 
     //删除单个或者多个管理员
-    @Operation(summary = "删除管理员", description = "删除单个或者多个管理员信息", parameters = {
-            @Parameter(name = "ids", description = "管理员id数组", required = true)
-    })
+    @Operation(summary = "删除管理员", description = "删除单个或者多个管理员信息", parameters = {@Parameter(name = "ids", description = "管理员id数组", required = true)})
     @DeleteMapping("/deleteAdmin")
     public Result<Object> deleteAdmin(@RequestBody List<Integer> ids) {
         adminService.removeByIds(ids);
