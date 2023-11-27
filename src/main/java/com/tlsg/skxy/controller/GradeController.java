@@ -37,18 +37,18 @@ public class GradeController {
 
         gradeService.removeByIds(ids);
         return Result.ok();
-    }
+    }//http://localhost:8080/sms/gradeController/deleteGrade
 
-    //增加或者修改年级
-    @Operation(summary = "增加或者修改年级", description = "增加或者修改年级信息", parameters = @Parameter(name = "grade", description = "JSON格式的年级信息", required = true))
+    //?增加或修改年级
+    @Operation(summary = "增加或修改年级", description = "增加或者修改年级信息", parameters = @Parameter(name = "grade", description = "JSON格式的年级信息", required = true))
     @PostMapping("/saveOrUpdateGrade")
     public Result<Object> saveOrUpdateGrade(@RequestBody Grade grade) {
 
         gradeService.saveOrUpdate(grade);
         return Result.ok();
-    }
+    }//http://localhost:8080/sms/gradeController/saveOrUpdateGrade
 
-    //年级名称模糊查询, 带分页
+    //?年级名称模糊查询, 带分页
     @Operation(summary = "分页查年级", description = "分页带条件查询年级信息", parameters = {
             @Parameter(name = "pageNo", description = "当前页码", required = true),
             @Parameter(name = "pageSize", description = "每页显示条数", required = true),
@@ -62,6 +62,6 @@ public class GradeController {
         IPage<Grade> pageRs = gradeService.getGradeByOpr(page, gradeName);
 
         return Result.ok(pageRs);
-    }
+    }//http://localhost:8080/sms/gradeController/getGrades/1/5?gradeName=一
 
 }

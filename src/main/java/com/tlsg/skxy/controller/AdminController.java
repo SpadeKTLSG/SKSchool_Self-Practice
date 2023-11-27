@@ -41,14 +41,14 @@ public class AdminController {
     //http://localhost:8080/sms/adminController/getAllAdmin/1/5
 
 
-    //!增加或修改管理员
+    //?增加或修改管理员
     //NOTE : 注意图片上传内容, 见图片上传工具类
+    //NOTE : 现在觉得应该在确认修改还是增加上进行区分,否则覆盖的时候会有不方便(这个就算了)
     @Operation(summary = "增加或修改管理员", description = "增加或修改管理员信息", parameters = {
             @Parameter(name = "admin", description = "JSON格式的Admin对象", required = true)})
     @PostMapping("/saveOrUpdateAdmin")
     public Result<Object> saveOrUpdateAdmin(@RequestBody Admin admin) throws CustomException { //自定义业务异常
         Integer id = admin.getId();
-        //FIXME 主键插入异常, 会导致覆盖问题...
         if (id == null || id == 0) {
             return Result.fail("id不能为空");
         }
