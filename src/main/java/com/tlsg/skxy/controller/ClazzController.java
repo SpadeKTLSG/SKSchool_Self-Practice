@@ -22,14 +22,13 @@ public class ClazzController {
     private ClazzService clazzService;
 
     //?查全部班级信息
-    //NOTE : 哎呀前面查全部和这个的接口名称不一样, Service的命名也有点乱呢...
     @Operation(summary = "查询所有班级", description = "查询所有班级信息", parameters = {})
     @GetMapping("/getClazzs")
     public Result<Object> getClazzs() {
         List<Clazz> clazzes = clazzService.getClazzs();
         return Result.ok(clazzes);
-    }
-    //http://localhost:8080/sms/clazzController/getClazzs
+    }//http://localhost:8080/sms/clazzController/getClazzs
+
 
     //?删除单个和多个班级
     @Operation(summary = "删除班级", description = "删除单个和多个班级", parameters = {
@@ -38,8 +37,7 @@ public class ClazzController {
     public Result<Object> deleteClazz(@RequestBody List<Integer> ids) {
         clazzService.removeByIds(ids);
         return Result.ok();
-    }
-    //http://localhost:8080/sms/clazzController/deleteClazz
+    }//http://localhost:8080/sms/clazzController/deleteClazz
 
 
     //?增加或者修改班级信息

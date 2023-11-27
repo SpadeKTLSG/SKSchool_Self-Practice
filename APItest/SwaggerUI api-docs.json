@@ -1,0 +1,1277 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "SK API",
+    "description": "SK智慧校园API文档",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://springdoc.org"
+    },
+    "version": "v114.514"
+  },
+  "externalDocs": {
+    "description": "外部文档",
+    "url": "https://springshop.wiki.github.org/docs"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Admin",
+      "description": "管理员控制器"
+    },
+    {
+      "name": "Clazz",
+      "description": "班级控制器"
+    },
+    {
+      "name": "Grade",
+      "description": "年级控制器"
+    },
+    {
+      "name": "Student",
+      "description": "学生控制器"
+    },
+    {
+      "name": "System",
+      "description": "系统控制器"
+    },
+    {
+      "name": "Teacher",
+      "description": "教师控制器"
+    }
+  ],
+  "paths": {
+    "/updatePwd/{oldPwd}/{newPwd}": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "修改密码",
+        "description": "修改密码接口",
+        "operationId": "updatePwd",
+        "parameters": [
+          {
+            "name": "oldPwd",
+            "in": "path",
+            "description": "旧密码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "newPwd",
+            "in": "path",
+            "description": "新密码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/teacherController/saveOrUpdateTeacher": {
+      "post": {
+        "tags": [
+          "Teacher"
+        ],
+        "summary": "保存或修改教师",
+        "description": "保存或者修改教师信息",
+        "operationId": "saveOrUpdateTeacher",
+        "parameters": [
+          {
+            "name": "teacher",
+            "in": "query",
+            "description": "要保存或修改的教师JSON",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Teacher"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/studentController/addOrUpdateStudent": {
+      "post": {
+        "tags": [
+          "Student"
+        ],
+        "summary": "保存或者修改学生信息",
+        "description": "保存或者修改学生信息",
+        "operationId": "addOrUpdateStudent",
+        "parameters": [
+          {
+            "name": "student",
+            "in": "query",
+            "description": "要保存或修改的学生JSON",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Student"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/gradeController/saveOrUpdateGrade": {
+      "post": {
+        "tags": [
+          "Grade"
+        ],
+        "summary": "增加或修改年级",
+        "description": "增加或者修改年级信息",
+        "operationId": "saveOrUpdateGrade",
+        "parameters": [
+          {
+            "name": "grade",
+            "in": "query",
+            "description": "JSON格式的年级信息",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Grade"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/clazzController/saveOrUpdateClazz": {
+      "post": {
+        "tags": [
+          "Clazz"
+        ],
+        "summary": "增加或者修改班级",
+        "description": "增加或者修改班级信息",
+        "operationId": "saveOrUpdateClazz",
+        "parameters": [
+          {
+            "name": "clazz",
+            "in": "query",
+            "description": "JSON格式的班级信息",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Clazz"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/adminController/saveOrUpdateAdmin": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "增加或修改管理员",
+        "description": "增加或修改管理员信息",
+        "operationId": "saveOrUpdateAdmin",
+        "parameters": [
+          {
+            "name": "admin",
+            "in": "query",
+            "description": "JSON格式的Admin对象",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Admin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "登录",
+        "description": "登录接口",
+        "operationId": "login",
+        "parameters": [
+          {
+            "name": "loginForm",
+            "in": "query",
+            "description": "登录表单",
+            "required": true
+          },
+          {
+            "name": "request",
+            "in": "query",
+            "description": "请求",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/headerImgUpload": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "上传图片",
+        "description": "上传图片接口",
+        "operationId": "headerImgUpload",
+        "parameters": [
+          {
+            "name": "multipartFile",
+            "in": "query",
+            "description": "图片文件",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          {
+            "name": "request",
+            "in": "query",
+            "description": "请求",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/teacherController/getTeachers/{pageNo}/{pageSize}": {
+      "get": {
+        "tags": [
+          "Teacher"
+        ],
+        "summary": "分页带条件查询教师信息",
+        "description": "分页带条件查询教师信息",
+        "operationId": "getTeachers",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "页大小",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "teacher",
+            "in": "query",
+            "description": "查询的条件",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Teacher"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/studentController/getStudentByOpr/{pageNo}/{pageSize}": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "summary": "分页带条件查询学生信息",
+        "description": "分页带条件查询学生信息",
+        "operationId": "getStudentBuOpr",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "页大小",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "student",
+            "in": "query",
+            "description": "查询的条件",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Student"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/gradeController/getGrades": {
+      "get": {
+        "tags": [
+          "Grade"
+        ],
+        "summary": "查询所有年级",
+        "description": "查询所有年级信息",
+        "operationId": "getGrades",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/gradeController/getGrades/{pageNo}/{pageSize}": {
+      "get": {
+        "tags": [
+          "Grade"
+        ],
+        "summary": "分页查年级",
+        "description": "分页带条件查询年级信息",
+        "operationId": "getGrades_1",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "当前页码",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "gradeName",
+            "in": "query",
+            "description": "年级名称",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/clazzController/getClazzs": {
+      "get": {
+        "tags": [
+          "Clazz"
+        ],
+        "summary": "查询所有班级",
+        "description": "查询所有班级信息",
+        "operationId": "getClazzs",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/clazzController/getClazzsByOpr/{pageNo}/{pageSize}": {
+      "get": {
+        "tags": [
+          "Clazz"
+        ],
+        "summary": "分页查班级",
+        "description": "分页带条件查询班级信息",
+        "operationId": "getClazzByOpr",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "当前页码",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "clazz",
+            "in": "query",
+            "description": "班级信息",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Clazz"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/adminController/getAllAdmin/{pageNo}/{pageSize}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "分页查管理员",
+        "description": "分页带条件查询管理员信息",
+        "operationId": "getAllAdmin",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "path",
+            "description": "页码数",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "页大小",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "adminName",
+            "in": "query",
+            "description": "管理员名字",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getVerifiCodeImage": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "获取验证码图片",
+        "description": "获取验证码图片接口",
+        "operationId": "getVerifiCodeImage",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "description": "请求",
+            "required": true
+          },
+          {
+            "name": "response",
+            "in": "query",
+            "description": "响应",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/getInfo": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "获取用户信息",
+        "description": "通过token口令获取当前登录的用户信息",
+        "operationId": "getInfoByToken",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/teacherController/deleteTeacher": {
+      "delete": {
+        "tags": [
+          "Teacher"
+        ],
+        "summary": "删除教师",
+        "description": "删除单个或者多个教师信息",
+        "operationId": "deleteTeacher",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "要删除的教师编号的JSON数组",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/studentController/delStudentById": {
+      "delete": {
+        "tags": [
+          "Student"
+        ],
+        "summary": "删除学生",
+        "description": "删除单个或者多个学生信息",
+        "operationId": "delStudentById",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "要删除的学生编号的JSON数组",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/gradeController/deleteGrade": {
+      "delete": {
+        "tags": [
+          "Grade"
+        ],
+        "summary": "删除年级",
+        "description": "删除单个和多个年级",
+        "operationId": "deleteGrade",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "要删除的多个年级的ID的JSON数组",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/clazzController/deleteClazz": {
+      "delete": {
+        "tags": [
+          "Clazz"
+        ],
+        "summary": "删除班级",
+        "description": "删除单个和多个班级",
+        "operationId": "deleteClazz",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "要删除的多个班级的ID的JSON数组",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sms/adminController/deleteAdmin": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "删除管理员",
+        "description": "删除单个或者多个管理员信息",
+        "operationId": "deleteAdmin",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "管理员id数组",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResultObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "状态码",
+            "format": "int32",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "消息",
+            "example": "操作成功"
+          },
+          "data": {
+            "type": "object",
+            "description": "数据",
+            "example": null
+          },
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Teacher": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "教师Id",
+            "format": "int32",
+            "example": 1
+          },
+          "tno": {
+            "type": "string",
+            "description": "教师工号",
+            "example": "1001"
+          },
+          "name": {
+            "type": "string",
+            "description": "教师姓名",
+            "example": "张三"
+          },
+          "gender": {
+            "type": "string",
+            "description": "教师性别",
+            "example": "男"
+          },
+          "password": {
+            "type": "string",
+            "description": "教师密码",
+            "example": "123456"
+          },
+          "email": {
+            "type": "string",
+            "description": "教师邮箱",
+            "example": "2421361985"
+          },
+          "telephone": {
+            "type": "string",
+            "description": "教师电话",
+            "example": "18888888888"
+          },
+          "address": {
+            "type": "string",
+            "description": "教师地址",
+            "example": "广东省广州市"
+          },
+          "portrait": {
+            "type": "string",
+            "description": "教师头像",
+            "example": "http://localhost:8080/sms/teacherController/getPortrait/1"
+          },
+          "portraitPath": {
+            "type": "string",
+            "description": "教师头像路径",
+            "example": "http://localhost:8080/sms/teacherController/getPortrait/1"
+          }
+        }
+      },
+      "Student": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "学生Id",
+            "format": "int32",
+            "example": 1
+          },
+          "sno": {
+            "type": "string",
+            "description": "学生学号",
+            "example": "2018111111"
+          },
+          "name": {
+            "type": "string",
+            "description": "学生姓名",
+            "example": "张三"
+          },
+          "gender": {
+            "type": "string",
+            "description": "学生性别",
+            "example": "男"
+          },
+          "password": {
+            "type": "string",
+            "description": "学生密码",
+            "example": "123456"
+          },
+          "email": {
+            "type": "string",
+            "description": "学生邮箱",
+            "example": "2421361985"
+          },
+          "telephone": {
+            "type": "string",
+            "description": "学生电话",
+            "example": "18888888888"
+          },
+          "address": {
+            "type": "string",
+            "description": "学生地址",
+            "example": "广东省广州市"
+          },
+          "introducation": {
+            "type": "string",
+            "description": "学生介绍",
+            "example": "我是一个学生"
+          },
+          "portrait": {
+            "type": "string",
+            "description": "学生头像",
+            "example": "http://localhost:8080/sms/studentController/getPortrait/1"
+          },
+          "portraitPath": {
+            "type": "string",
+            "description": "学生头像路径",
+            "example": "http://localhost:8080/sms/studentController/getPortrait/1"
+          }
+        }
+      },
+      "Grade": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "年级Id",
+            "format": "int32",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "年级名称",
+            "example": "软件工程"
+          },
+          "introducation": {
+            "type": "string",
+            "description": "年级介绍",
+            "example": "软件工程"
+          },
+          "manager": {
+            "type": "string",
+            "description": "年级主任姓名",
+            "example": "张三"
+          },
+          "email": {
+            "type": "string",
+            "description": "年级主任邮箱",
+            "example": "2421361985"
+          },
+          "telephone": {
+            "type": "string",
+            "description": "年级主任电话",
+            "example": "18888888888"
+          }
+        }
+      },
+      "Clazz": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "班级Id",
+            "format": "int32",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "班级名称",
+            "example": "软件工程1班"
+          },
+          "number": {
+            "type": "string",
+            "description": "班级人数",
+            "example": "50"
+          },
+          "introducation": {
+            "type": "string",
+            "description": "班级介绍",
+            "example": "软件工程1班"
+          },
+          "headmaster": {
+            "type": "string",
+            "description": "班主任姓名",
+            "example": "张三"
+          },
+          "telephone": {
+            "type": "string",
+            "description": "班主任电话",
+            "example": "18888888888"
+          },
+          "email": {
+            "type": "string",
+            "description": "班主任邮箱",
+            "example": "2421361985"
+          },
+          "gradeName": {
+            "type": "string",
+            "description": "班级所属年级",
+            "example": "软件工程"
+          }
+        }
+      },
+      "Admin": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "管理员id",
+            "format": "int32",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "姓名",
+            "example": "张三"
+          },
+          "gender": {
+            "type": "string",
+            "description": "性别",
+            "example": "男"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码",
+            "example": "123456"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱",
+            "example": "2425398986@qq.com"
+          },
+          "telephone": {
+            "type": "string",
+            "description": "电话",
+            "example": "18888888888"
+          },
+          "address": {
+            "type": "string",
+            "description": "地址",
+            "example": "广东省广州市天河区"
+          },
+          "portraitPath": {
+            "type": "string",
+            "description": "头像的图片路径",
+            "example": "http://localhost:8080/img/1.jpg"
+          }
+        }
+      },
+      "LoginForm": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "用户名",
+            "example": "admin"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码",
+            "example": "123456"
+          },
+          "verifiCode": {
+            "type": "string",
+            "description": "验证码",
+            "example": "1234"
+          },
+          "userType": {
+            "type": "integer",
+            "description": "用户类型",
+            "format": "int32",
+            "example": 1
+          }
+        }
+      }
+    }
+  }
+}

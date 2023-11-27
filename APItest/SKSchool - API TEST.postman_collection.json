@@ -1,0 +1,715 @@
+{
+	"info": {
+		"_postman_id": "5221fd8d-fac2-41e5-8852-244ca2577456",
+		"name": "SKSchool - API TEST",
+		"description": "SK校园接口测试",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "saveOrUpdate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 3,\r\n  \"name\": \"王五\",\r\n  \"gender\": \"男\",\r\n  \"password\": \"11116\",\r\n  \"email\": \"2425311116@qq.com\",\r\n  \"telephone\": \"18888888888\",\r\n  \"address\": \"广东省广州市天河区\",\r\n  \"portraitPath\": \"http://localhost:8080/img/1.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/adminController/saveOrUpdateAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"adminController",
+								"saveOrUpdateAdmin"
+							]
+						},
+						"description": "增加或修改管理员"
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/adminController/getAllAdmin/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"adminController",
+								"getAllAdmin",
+								"1",
+								"5"
+							]
+						},
+						"description": "分页带条件查询管理员"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ids",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "ids",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/adminController/deleteAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"adminController",
+								"deleteAdmin"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "ids",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						},
+						"description": "删除单个或者多个管理员"
+					},
+					"response": []
+				}
+			],
+			"description": "管理员",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Clazz",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/sms/clazzController/getClazzs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"clazzController",
+								"getClazzs"
+							]
+						},
+						"description": "查询所有班级"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ids",
+									"value": "2",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/clazzController/deleteClazz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"clazzController",
+								"deleteClazz"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveOrUpdate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"name\": \"软件工程1班\",\r\n  \"number\": \"50\",\r\n  \"introducation\": \"软件工程1班\",\r\n  \"headmaster\": \"张三\",\r\n  \"telephone\": \"18888888888\",\r\n  \"email\": \"2421361985\",\r\n  \"gradeName\": \"软件工程\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/clazzController/saveOrUpdateClazz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"clazzController",
+								"saveOrUpdateClazz"
+							]
+						},
+						"description": "增加或修改数据"
+					},
+					"response": []
+				},
+				{
+					"name": "getByOpr",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/sms/clazzController/getClazzsByOpr/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"clazzController",
+								"getClazzsByOpr",
+								"1",
+								"5"
+							]
+						},
+						"description": "分页带条件查"
+					},
+					"response": []
+				}
+			],
+			"description": "班级"
+		},
+		{
+			"name": "Grade",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/sms/gradeController/getGrades",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"gradeController",
+								"getGrades"
+							]
+						},
+						"description": "查全部"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n 1 \r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/gradeController/deleteGrade",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"gradeController",
+								"deleteGrade"
+							]
+						},
+						"description": "删除单个和多个"
+					},
+					"response": []
+				},
+				{
+					"name": "saveOrUpdate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"name\": \"软件工程\",\r\n  \"introducation\": \"软件工程\",\r\n  \"manager\": \"张三\",\r\n  \"email\": \"2421361985\",\r\n  \"telephone\": \"18888888888\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/gradeController/saveOrUpdateGrade",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"gradeController",
+								"saveOrUpdateGrade"
+							]
+						},
+						"description": "增加或修改年级"
+					},
+					"response": []
+				},
+				{
+					"name": "getByOprPlus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/sms/gradeController/getGrades/1/5?gradeName=二",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"gradeController",
+								"getGrades",
+								"1",
+								"5"
+							],
+							"query": [
+								{
+									"key": "gradeName",
+									"value": "二"
+								}
+							]
+						},
+						"description": "年级名称带分页模糊查询"
+					},
+					"response": []
+				}
+			],
+			"description": "年级"
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "deleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  1\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/studentController/delStudentById",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"studentController",
+								"delStudentById"
+							]
+						},
+						"description": "删除单个或多个"
+					},
+					"response": []
+				},
+				{
+					"name": "saveOrUpdate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"sno\": \"2018111111\",\r\n  \"name\": \"张三\",\r\n  \"gender\": \"男\",\r\n  \"password\": \"123456\",\r\n  \"email\": \"2421361985\",\r\n  \"telephone\": \"18888888888\",\r\n  \"address\": \"广东省广州市\",\r\n  \"introducation\": \"我是一个学生\",\r\n  \"portrait\": \"http://localhost:8080/sms/studentController/getPortrait/1\",\r\n  \"portraitPath\": \"http://localhost:8080/sms/studentController/getPortrait/1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/studentController/addOrUpdateStudent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"studentController",
+								"addOrUpdateStudent"
+							]
+						},
+						"description": "增加或修改"
+					},
+					"response": []
+				},
+				{
+					"name": "getPage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/sms/studentController/getStudentByOpr/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"studentController",
+								"getStudentByOpr",
+								"1",
+								"5"
+							]
+						},
+						"description": "分页查"
+					},
+					"response": []
+				}
+			],
+			"description": "学生"
+		},
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\",\r\n    \"verifiCode\": \"1234\",\r\n    \"userType\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "userType",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						},
+						"description": "登录"
+					},
+					"response": []
+				},
+				{
+					"name": "getVerifiCodeImage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/getVerifiCodeImage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getVerifiCodeImage"
+							]
+						},
+						"description": "获取验证码图片"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePwd",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/updatePwd/123456/123456",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"updatePwd",
+								"123456",
+								"123456"
+							]
+						},
+						"description": "修改密码"
+					},
+					"response": []
+				},
+				{
+					"name": "headerImgUpload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/headerImgUpload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"headerImgUpload"
+							]
+						},
+						"description": "图片上传"
+					},
+					"response": []
+				},
+				{
+					"name": "getInfoByToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/getInfo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getInfo"
+							]
+						},
+						"description": "Token获取用户信息"
+					},
+					"response": []
+				}
+			],
+			"description": "系统相关"
+		},
+		{
+			"name": "Teacher",
+			"item": [
+				{
+					"name": "getPage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/sms/teacherController/getTeachers/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"teacherController",
+								"getTeachers",
+								"1",
+								"5"
+							]
+						},
+						"description": "分页查"
+					},
+					"response": []
+				},
+				{
+					"name": "saveOrUpdate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"tno\": \"1001\",\r\n    \"name\": \"张三\",\r\n    \"gender\": \"男\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"2421361985\",\r\n    \"telephone\": \"18888888888\",\r\n    \"address\": \"广东省广州市\",\r\n    \"portrait\": \"http://localhost:8080/sms/teacherController/getPortrait/1\",\r\n    \"portraitPath\": \"http://localhost:8080/sms/teacherController/getPortrait/1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/teacherController/saveOrUpdateTeacher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"teacherController",
+								"saveOrUpdateTeacher"
+							]
+						},
+						"description": "增加或删除"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByIds",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  1\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sms/teacherController/deleteTeacher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sms",
+								"teacherController",
+								"deleteTeacher"
+							]
+						},
+						"description": "删除多个"
+					},
+					"response": []
+				}
+			],
+			"description": "教师"
+		}
+	]
+}

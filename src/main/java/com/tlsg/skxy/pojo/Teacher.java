@@ -2,7 +2,6 @@ package com.tlsg.skxy.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,7 +44,8 @@ public class Teacher {
     @Schema(name = "portraitPath", type = "String", description = "教师头像路径", example = "http://localhost:8080/sms/teacherController/getPortrait/1")
     private String portraitPath;//存储头像的项目路径
 
-    @TableLogic
-    @Schema(name = "isDeleted", type = "Integer", description = "逻辑删除", example = "0")
-    private Integer isDeleted; //逻辑删除
+    //! 这里没有作实现,注释
+//    @TableLogic
+//    @Schema(name = "isDeleted", type = "Integer", description = "逻辑删除", example = "0")
+//    private Integer isDeleted; //逻辑删除
 }

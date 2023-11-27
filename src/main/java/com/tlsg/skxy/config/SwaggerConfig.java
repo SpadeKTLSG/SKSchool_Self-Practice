@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-
-    //由于刚上手, 不太会用, 先这样写着, 以后再改
+    
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()

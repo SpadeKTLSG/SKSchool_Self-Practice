@@ -37,6 +37,9 @@ import java.util.UUID;
 @Tag(name = "System", description = "系统控制器")
 public class SystemController {
 
+    //! README : 需要验证码, Postman不好调试,建议使用浏览器调试
+    //TODO : 掌握Postman->Session控制内容...
+
     @Autowired
     private AdminService adminService;
     @Autowired
@@ -44,8 +47,8 @@ public class SystemController {
     @Autowired
     private TeacherService teacherService;
 
+
     //? 登录
-    //! README : 需要验证码, Postman不好调试,建议使用浏览器调试
     @Operation(summary = "登录", description = "登录接口", parameters = {
             @Parameter(name = "loginForm", description = "登录表单", required = true),
             @Parameter(name = "request", description = "请求", required = true)}
@@ -262,17 +265,25 @@ public class SystemController {
     }// http://localhost:8080/headerImgUpload
 
 
-    // 获取用户信息
+    //? 获取用户信息
     @Operation(summary = "获取用户信息", description = "通过token口令获取当前登录的用户信息",
             parameters = {
                     @Parameter(name = "token", description = "token", required = true)}
     )
     @GetMapping("/getInfo")
     public Result<Object> getInfoByToken(String token) {
+
+        //判断token是否存在
+        if (token == null || token.isEmpty()) {
+            return Result.build(null, ResultCodeEnum.TOKEN_ERROR);
+        }
+
         boolean expiration = JwtHelper.isExpiration(token);
+
         if (expiration) {
             return Result.build(null, ResultCodeEnum.TOKEN_ERROR);
         }
+
         //从token中解析出 用户id 和用户的类型
         Long userId = JwtHelper.getUserId(token);
         Integer userType = JwtHelper.getUserType(token);
@@ -297,6 +308,7 @@ public class SystemController {
             }
         }
         return Result.ok(map);
-    }
+    }// http://localhost:8080/getInfo
+
 
 }

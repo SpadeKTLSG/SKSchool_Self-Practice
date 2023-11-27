@@ -36,14 +36,10 @@ public class AdminController {
 
         IPage<Admin> iPage = adminService.getAdminsByOpr(pageParam, adminName);
         return Result.ok(iPage);
-    }
-    //http://localhost:8080/sms/adminController/getAllAdmin/1/5?adminName=张三
-    //http://localhost:8080/sms/adminController/getAllAdmin/1/5
+    } //http://localhost:8080/sms/adminController/getAllAdmin/1/5?adminName=张三
 
 
     //?增加或修改管理员
-    //NOTE : 注意图片上传内容, 见图片上传工具类
-    //NOTE : 现在觉得应该在确认修改还是增加上进行区分,否则覆盖的时候会有不方便(这个就算了)
     @Operation(summary = "增加或修改管理员", description = "增加或修改管理员信息", parameters = {
             @Parameter(name = "admin", description = "JSON格式的Admin对象", required = true)})
     @PostMapping("/saveOrUpdateAdmin")
@@ -60,8 +56,7 @@ public class AdminController {
             return Result.ok();
 
         }
-    }
-    //http://localhost:8080/sms/adminController/saveOrUpdateAdmin
+    }    //http://localhost:8080/sms/adminController/saveOrUpdateAdmin
 
 
     //?删除单个或者多个管理员
@@ -71,8 +66,7 @@ public class AdminController {
     public Result<Object> deleteAdmin(@RequestBody List<Integer> ids) {
         adminService.removeByIds(ids);
         return Result.ok();
-    }
-    //http://localhost:8080/sms/adminController/deleteAdmin
+    } //http://localhost:8080/sms/adminController/deleteAdmin
 
 
 }

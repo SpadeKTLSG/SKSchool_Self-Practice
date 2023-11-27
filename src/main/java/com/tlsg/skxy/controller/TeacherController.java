@@ -22,7 +22,7 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-    //分页查询
+    //?分页查询
     @Operation(summary = "分页带条件查询教师信息", description = "分页带条件查询教师信息", parameters = {
             @Parameter(name = "pageNo", description = "页码数", required = true),
             @Parameter(name = "pageSize", description = "页大小", required = true),
@@ -35,11 +35,12 @@ public class TeacherController {
         IPage<Teacher> page = teacherService.getTeachersByOpr(paraParam, teacher);
 
         return Result.ok(page);
-    }
+    }//http://localhost:8080/sms/teacherController/getTeachers/1/5
 
 
-    //添加或修改
-    @Operation(summary = "保存或修改教师", description = "保存或者修改教师信息", parameters = {@Parameter(name = "teacher", description = "要保存或修改的教师JSON", required = true)})
+    //?添加或修改
+    @Operation(summary = "保存或修改教师", description = "保存或者修改教师信息", parameters = {
+            @Parameter(name = "teacher", description = "要保存或修改的教师JSON", required = true)})
     @PostMapping("/saveOrUpdateTeacher")
     public Result<Object> saveOrUpdateTeacher(@RequestBody Teacher teacher) {
 
@@ -50,16 +51,17 @@ public class TeacherController {
 
         teacherService.saveOrUpdate(teacher);
         return Result.ok();
-    }
+    }//http://localhost:8080/sms/teacherController/saveOrUpdateTeacher
 
 
-    //删除
-    @Operation(summary = "删除教师", description = "删除单个或者多个教师信息", parameters = {@Parameter(name = "ids", description = "要删除的教师编号的JSON数组", required = true)})
+    //?删除
+    @Operation(summary = "删除教师", description = "删除单个或者多个教师信息", parameters = {
+            @Parameter(name = "ids", description = "要删除的教师编号的JSON数组", required = true)})
     @DeleteMapping("/deleteTeacher")
     public Result<Object> deleteTeacher(@RequestBody List<Integer> ids) {
         teacherService.removeByIds(ids);
         return Result.ok();
-    }
+    }//http://localhost:8080/sms/teacherController/deleteTeacher
 
 }
 
