@@ -25,8 +25,11 @@ public class AdminController {
     private AdminService adminService;
 
 
-    //分页带条件查询管理员
-    @Operation(summary = "分页查管理员", description = "分页带条件查询管理员信息", parameters = {@Parameter(name = "pageNo", description = "页码数", required = true), @Parameter(name = "pageSize", description = "页大小", required = true), @Parameter(name = "adminName", description = "管理员名字", required = false)})
+    //?分页带条件查询管理员
+    @Operation(summary = "分页查管理员", description = "分页带条件查询管理员信息", parameters = {
+            @Parameter(name = "pageNo", description = "页码数", required = true),
+            @Parameter(name = "pageSize", description = "页大小", required = true),
+            @Parameter(name = "adminName", description = "管理员名字")})
     @GetMapping("/getAllAdmin/{pageNo}/{pageSize}")
     public Result<Object> getAllAdmin(@PathVariable("pageNo") Integer pageNo, @PathVariable("pageSize") Integer pageSize, String adminName) {
         Page<Admin> pageParam = new Page<>(pageNo, pageSize);
@@ -34,11 +37,14 @@ public class AdminController {
         IPage<Admin> iPage = adminService.getAdminsByOpr(pageParam, adminName);
         return Result.ok(iPage);
     }
+    //http://localhost:8080/sms/adminController/getAllAdmin/1/5?adminName=张三
+    //http://localhost:8080/sms/adminController/getAllAdmin/1/5
 
 
-    //增加或修改管理员
-    //注意图片上传内容, 见图片上传工具类
-    @Operation(summary = "增加或修改管理员", description = "增加或修改管理员信息", parameters = {@Parameter(name = "admin", description = "JSON格式的Admin对象", required = true)})
+    //!增加或修改管理员
+    //NOTE : 注意图片上传内容, 见图片上传工具类
+    @Operation(summary = "增加或修改管理员", description = "增加或修改管理员信息", parameters = {
+            @Parameter(name = "admin", description = "JSON格式的Admin对象", required = true)})
     @PostMapping("/saveOrUpdateAdmin")
     public Result<Object> saveOrUpdateAdmin(@RequestBody Admin admin) throws CustomException { //自定义业务异常
         Integer id = admin.getId();
@@ -55,15 +61,18 @@ public class AdminController {
 
         }
     }
+    //http://localhost:8080/sms/adminController/saveOrUpdateAdmin
 
 
-    //删除单个或者多个管理员
-    @Operation(summary = "删除管理员", description = "删除单个或者多个管理员信息", parameters = {@Parameter(name = "ids", description = "管理员id数组", required = true)})
+    //?删除单个或者多个管理员
+    @Operation(summary = "删除管理员", description = "删除单个或者多个管理员信息", parameters = {
+            @Parameter(name = "ids", description = "管理员id数组", required = true)})
     @DeleteMapping("/deleteAdmin")
-    public Result<Object> deleteAdmin(@RequestBody List<Integer> ids) {
+    public Result<Object> deleteAdmin(@RequestParam List<Integer> ids) {
         adminService.removeByIds(ids);
         return Result.ok();
     }
+    //http://localhost:8080/sms/adminController/deleteAdmin?ids=1&ids=2
 
 
 }
